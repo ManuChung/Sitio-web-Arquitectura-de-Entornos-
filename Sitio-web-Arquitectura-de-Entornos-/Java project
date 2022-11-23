@@ -1,0 +1,80 @@
+protected void actionPerformedBtnVender(ActionEvent e) {
+	ingresarDato();
+	calcularPago();
+	calcularDescuento();
+	calcularImporteFinal();
+	obsequio();
+	mostrarResultado();
+	}
+	int cant, mdl, obs;
+	double pag, prec,desc,imf;
+	String nom;
+	
+	void ingresarDato() {
+		mdl=cboModelo.getSelectedIndex();
+		cant=Integer.parseInt(txtCantidad.getText());
+	}
+	void calcularPago () {
+		switch(mdl) {
+		case 0:
+		nom= modelo0;
+		prec = precio0;
+		pag= prec*cant;
+		break;
+		case 1:
+		nom= modelo1;
+		prec = precio1;
+		pag= prec*cant;
+		break;
+		case 2:
+		nom= modelo2;
+		prec = precio2;
+		pag= prec*cant;
+		break;
+		case 3:
+		nom= modelo3;
+		prec = precio3;
+		pag= prec*cant;
+		break;
+		case 4:
+		nom= modelo4;
+		prec = precio4;
+		pag= prec*cant;
+		break;
+		}
+	}
+
+	void calcularDescuento() {
+			if (cant>0 && cant < 6)
+			desc= porcentaje1 * pag;
+			else if (cant < 11)
+			desc= porcentaje2 * pag;
+			else if (cant < 16)
+			desc= porcentaje3 * pag;
+			else 
+			desc= porcentaje4 * pag;
+	}
+	void obsequio() {
+		if (cant>0 && cant < 6)
+		   obs = obsequioCantidad1 ;
+			else if (cant < 11)
+			obs = obsequioCantidad2;
+			else 
+			obs = obsequioCantidad3;
+		
+	}
+	void calcularImporteFinal() {
+		imf= pag-desc;
+	}
+	void mostrarResultado() {
+		txtS.setText("BOLETA DE VENTA"+ "\n");
+		txtS.append("Modelo es: "+ nom + "\n");
+		txtS.append("Precio   : S/"+ prec + "\n");
+		txtS.append("Cantidad   : "+ cant + "\n");
+		txtS.append("Importe de compra   : S/"+ pag + "\n");
+		txtS.append("Importe descuento   : S/"+ desc + "\n");
+		txtS.append("Importe a pagar   : S/"+ imf + "\n");
+		txtS.append("Tipo de obsequio   : "+ tipoObsequio + "\n");
+		txtS.append("unidades obsequiadas   : "+ obs + "\n");
+		txtPrecio.setText("S/"+ prec +"\n");
+	}
